@@ -1,19 +1,21 @@
+Here's an updated version of the `README.md` for improved clarity and flow:
+
 ```markdown
-# Urgency Classifier
+# Project Name
 
-This project contains an urgency classification model that loads a trained classifier from a pickle file to classify messages as either "Urgent" or "Non-Urgent." The code uses natural language processing (NLP) techniques and `scikit-learn` to make predictions based on the contents of a message.
+This project contains scripts for retraining and testing a text classification model, specifically aimed at categorizing messages based on urgency.
 
-## Files in This Project
+## Project Files
 
-- `requirements.txt`: Lists the Python libraries required to run the code.
-- `urgency.py`: Python script that loads the classifier and vectorizer, makes predictions on a sample message, and prints the result.
-- `urgency_classifier_model.pkl`: Pickle file containing the pre-trained classifier and vectorizer.
+- `requirements.txt`: Specifies the Python libraries needed to run the project.
+- `training.py`: Script to retrain the model with new data.
+- `main.py`: Runs test cases with the trained model to evaluate message classifications.
 
 ## Getting Started
 
 ### Prerequisites
 
-Ensure you have Python installed (Python 3.7 or newer is recommended).
+Ensure you have Python installed (version 3.7 or newer is recommended).
 
 ### Installation
 
@@ -21,7 +23,7 @@ Ensure you have Python installed (Python 3.7 or newer is recommended).
 
 2. Open a terminal in the project directory.
 
-3. Install the required libraries by running:
+3. Install the required libraries:
 
    ```bash
    pip install -r requirements.txt
@@ -29,41 +31,45 @@ Ensure you have Python installed (Python 3.7 or newer is recommended).
 
 ### Running the Code
 
-1. Open `urgency.py` and locate the `test_message` variable:
+1. Open `main.py` and locate the `message` variable:
 
    ```python
-   test_message = "Final notice: Complete the survey within 24 hours."
+   message = "Final notice: Complete the survey within 24 hours."
    ```
 
-   You can change the value of `test_message` to test different messages.
+   Modify the `message` value if you'd like to test a different message.
 
-2. Save the changes to `urgency.py` if you modified the `test_message`.
+2. Save the changes to `main.py` if you modified the `message` variable.
 
-3. Run the script in your terminal:
+3. Run the script in the terminal:
 
    ```bash
-   python urgency.py
+   python main.py
    ```
 
-4. The script will output the message and its predicted urgency label, for example:
+4. The script will output the predicted label and confidence score for each model, for example:
 
    ```plaintext
-   Test message: Final notice: Complete the survey within 24 hours.
    Predicted label: Urgent
+   Confidence score: 0.95
+   --------------------------------------------------
+   Predicted label: Threatening
+   Confidence score: 0.64
+   --------------------------------------------------
    ```
 
 ## Modifying the Test Message
 
-To test different messages, open `urgency.py`, change the `test_message` variable to your desired text, save the file, and run the script again.
+To test different messages, change the `message` variable in `main.py`, save the file, and rerun the script.
 
-## Additional Notes
+## Model Details
 
-- The model uses `TfidfVectorizer` and `LogisticRegression` from `scikit-learn` for text vectorization and classification.
-- You can extend this project by integrating more test messages, further training the model, or adapting it to other types of text classification tasks.
+- The model leverages `TfidfVectorizer` and `LogisticRegression` from `scikit-learn` for text vectorization and classification.
+- This setup can be extended to handle various text classification tasks or tested with multiple message types for broader applications.
 
 ## License
 
 This project is licensed under the MIT License.
 ```
 
-This `README.md` will guide users through setting up the environment, modifying the test message, and running the script to classify message urgency. Let me know if there’s anything else you’d like to add!
+This version consolidates information and streamlines the instructions for clarity. Let me know if there's anything specific you'd like to add!
