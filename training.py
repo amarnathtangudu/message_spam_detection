@@ -1,0 +1,5 @@
+from urgency.urgency_classifier_model import train_urgency_classifier
+from threatening.threatening_classifier_model import train_threatening_classifier
+
+train_urgency_classifier()
+train_threatening_classifier()
