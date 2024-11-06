@@ -1,5 +1,15 @@
+from prior_activy_promotion.prior_activity_classifier import classify_prior_activity
+from req_to_update_info.update_info_classifier import train_update_info_model
 from urgency.urgency_classifier_model import train_urgency_classifier
 from threatening.threatening_classifier_model import train_threatening_classifier
+from requesting_personal_information.rpi_classifier_model import train_rpi_model
+from gift_card.gf_classifier_model import train_gf_classifier
+from requesting_money.model_builder import build_rm_model
 
 train_urgency_classifier()
 train_threatening_classifier()
+train_rpi_model()
+train_gf_classifier()
+build_rm_model()
+train_update_info_model()
+classify_prior_activity()
