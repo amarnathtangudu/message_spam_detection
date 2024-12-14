@@ -2,6 +2,7 @@ import streamlit as st
 import pickle
 
 from get_prediction import get_classification
+from main import generate_features
 
 # Load the trained model
 with open("random_forest_model.pkl", "rb") as f:
@@ -10,9 +11,9 @@ with open("random_forest_model.pkl", "rb") as f:
 
 # Predict function
 def predict_message(message):
-    features = get_classification(message)
-    prediction = loaded_model.predict([features])[0]
-    return prediction
+    features = generate_features(message)
+    prediction = loaded_model.predict(features)
+    return 'spam' if prediction[0] == 1 else 'ham'
 
 # Streamlit App Interface
 st.title("Spam Classification Demo")
