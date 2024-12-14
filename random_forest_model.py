@@ -1,38 +1,29 @@
-import pandas as pd
-from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report
+import pandas as pd
 import pickle
 
-# Load the dataset
-data_file = 'updated_messages.csv'
-df = pd.read_csv(data_file)
+# Load the CSV file
+data = pd.read_csv('updated_messages.csv')
 
-# Preprocess the data
-df['Label'] = df['Label'].map({'spam': 1, 'ham': 0})  # Convert labels to binary
-features = df.drop(columns=['Label', 'Message'])  # Drop non-feature columns
-target = df['Label']
-
-# Ensure all features are numeric
-features = features.apply(pd.to_numeric, errors='coerce')
-
-# Handle any missing values
-features.fillna(0, inplace=True)
-
-# Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.2, random_state=42)
+# Select features and target
+feature_columns = [
+    "urgency_result_label", "urgency_result_score",
+    "threatening_result_label", "threatening_result_score",
+    "requesting_personal_information_result_label", "requesting_personal_information_result_score",
+    "gift_card_offer_result_label", "gift_card_offer_result_score",
+    "requesting_money_result_label", "requesting_money_result_score",
+    "update_bill_result_label", "update_bill_result_score",
+    "prior_activity_result_label", "prior_activity_result_score",
+]
+X = data[feature_columns]
+y = data["Label"].map({"ham": 0, "spam": 1})  # Encode labels as 0/1
 
 # Train the Random Forest model
-rf_model = RandomForestClassifier(random_state=42)
-rf_model.fit(X_train, y_train)
+model = RandomForestClassifier(n_estimators=100, random_state=42)
+model.fit(X, y)
 
-# Evaluate the model
-y_pred = rf_model.predict(X_test)
-print(classification_report(y_test, y_pred))
+# Save the trained model to a file
+with open('random_forest_model.pkl', 'wb') as file:
+    pickle.dump(model, file)
 
-# Save the model to a pickle file
-model_file = 'random_forest_model.pkl'
-with open(model_file, 'wb') as file:
-    pickle.dump(rf_model, file)
-
-print(f"Model saved to {model_file}")
+print("Model trained and saved as random_forest_model.pkl")
