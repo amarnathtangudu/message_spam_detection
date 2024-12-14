@@ -21,10 +21,11 @@ def get_urgency_classification(message):
     test_vectorized = loaded_vectorizer.transform([message])
     prediction = loaded_classifier.predict(test_vectorized)
     confidence_scores = loaded_classifier.predict_proba(test_vectorized)
-    predicted_label = "Urgent" if prediction[0] == 1 else "Non-Urgent"
+    predicted_label = prediction[0]
     confidence_score = confidence_scores[0][prediction[0]]
 
-    # print(f"Test message: {message}")
-    print(f"Predicted label: {predicted_label}")
-    print(f"Confidence score: {confidence_score:.2f}")
-    print("-" * 50)
+    result = {
+        "Predicted label": predicted_label,
+        "Confidence score": f"{confidence_score:.2f}"
+    }
+    return result

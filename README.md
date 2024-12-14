@@ -44,7 +44,7 @@ Ensure you have Python installed (version 3.7 or newer is recommended).
 3. Run the script in the terminal:
 
    ```bash
-   python main.py
+   python get_prediction.py
    ```
 
 4. The script will output the predicted label and confidence score for each model, for example:

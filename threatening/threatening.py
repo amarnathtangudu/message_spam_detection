@@ -24,10 +24,11 @@ def get_threatening_classification(message):
     confidence_scores = loaded_classifier.predict_proba(test_vectorized)
 
     # Get confidence score for the predicted class
-    predicted_label = "Threatening" if prediction[0] == 1 else "Non-Threatening"
+    predicted_label = prediction[0] == 1
     confidence_score = confidence_scores[0][prediction[0]]
 
-    # print(f"Test message: {message}")
-    print(f"Predicted label: {predicted_label}")
-    print(f"Confidence score: {confidence_score:.2f}")
-    print("-" * 50)
+    result = {
+        "Predicted label": predicted_label,
+        "Confidence score": f"{confidence_score:.2f}"
+    }
+    return result

@@ -27,13 +27,16 @@ def gf_classify(message):
     # Predict and get confidence scores
     predictions = loaded_classifier.predict(test_vectorized)
     confidence_scores = loaded_classifier.predict_proba(test_vectorized)
-
+    label = ""
+    confidence_score = 0
     # Print results with confidence scores
     for message, prediction, confidence in zip(
         test_messages, predictions, confidence_scores
     ):
-        label = "Gift Card Offer" if prediction == 1 else "Not a Gift Card Offer"
+        label = prediction == 1
         confidence_score = max(confidence)  # Get the confidence for the predicted class
-        print(
-            f"Message: {message}\nPredicted Label: {label}\nConfidence Score: {confidence_score:.2f}\n"
-        )
+    result = {
+        "Predicted label": label,
+        "Confidence score": f"{confidence_score:.2f}"
+    }
+    return result
